@@ -24,6 +24,7 @@ flutter run
 ## Fonctionnalités :gear:
 
 - :white_check_mark: Affichage de la liste de news depuis l'API (titre, description, image, date, latitude, longitude)
+  - Affichage de l'image de la news en plein écran lorsqu'on clique dessus
 - :white_check_mark: Récupération de page HTML depuis l'API pour afficher dans un navigateur webview
 - :white_check_mark: Page d'inscription (Sans l'image)
 - :white_check_mark: Affichage d'une carte avec les coordonnées de la news
