@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:test_technique/pages/ActualitesPage.dart';
 import 'package:test_technique/pages/InfosPage.dart';
+import 'package:test_technique/pages/InscriptionPage.dart';
 import 'package:test_technique/utils/constants.dart';
 
 
@@ -34,8 +35,8 @@ class NewsApplication extends StatelessWidget {
             bottom: const TabBar(
               tabs: [
                 Tab(icon: Icon(Icons.home), text: 'Home'),
-                Tab(icon: Icon(Icons.info), text: 'Infos'),
-                Tab(icon: Icon(Icons.settings), text: 'Settings'),
+                Tab(icon: Icon(Icons.info), text: 'Info'),
+                Tab(icon: Icon(Icons.settings), text: "Sign in"),
               ],
             ),
           ),
@@ -43,7 +44,7 @@ class NewsApplication extends StatelessWidget {
             children: [
               ActualitesPage(),
               InfosPage(),
-              Text('Settings'),
+              InscriptionPage(),
             ],
           ),
         ),

@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 import 'dart:convert';
 
 import 'package:test_technique/model/Interface/IActuManager.dart';
@@ -30,6 +34,46 @@ class ActuApi implements IActuManager {
       return jsonDecode(response.body);
     } else {
       throw Exception('Failed to fetch actualites');
+    }
+  }
+
+  @override
+  Future<void> submitRegistrationForm({
+    required String name,
+    required String email,
+    required String phone,
+    File? image,
+  }) async {
+    final Uri url = Uri.parse('${baseUrl}authentication/register');
+    final Map<String, String> headers = {
+      'Content-Type': 'multipart/form-data',
+      'Accept': 'application/json',
+      'Accept-Language': 'fr-FR',
+      'X-AP-Key': 'uD4Muli8nO6nzkSlsNM3d1Pm',
+      'X-AP-DeviceUID': 'Documentation',
+    };
+
+    final request = http.MultipartRequest('POST', url)
+      ..headers.addAll(headers);
+
+    request.fields['name'] = name;
+    request.fields['email'] = email;
+    request.fields['phone'] = phone;
+
+    if (image != null) {
+      final imagePath = image.path;
+      final imageFile = await http.MultipartFile.fromPath('picture', imagePath);
+      request.files.add(imageFile);
+    }
+
+    try {
+      final response = await request.send();
+      if (response.statusCode != 200) {
+        throw Exception('Failed to submit registration form');
+      }
+
+    } catch (error) {
+      throw Exception('Failed to submit registration form');
     }
   }
 }
