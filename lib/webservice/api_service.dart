@@ -6,10 +6,8 @@ import 'package:test_technique/model/Interface/IActuManager.dart';
 class ActuApi implements IActuManager {
   static final ActuApi _instance = ActuApi._internal();
   static ActuApi get instance => _instance;
-  // Private constructor
   ActuApi._internal();
 
-  // Getter to get the unique instance of the class
   factory ActuApi() {
     return _instance;
   }

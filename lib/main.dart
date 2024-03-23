@@ -32,17 +32,17 @@ class NewsApplication extends StatelessWidget {
             foregroundColor: colorText,
             bottom: const TabBar(
               tabs: [
-                Tab(icon: Icon(Icons.home), text: 'Home'), // Tab 1
-                Tab(icon: Icon(Icons.search), text: 'Search'), // Tab 2
-                Tab(icon: Icon(Icons.settings), text: 'Settings'), // Tab 3
+                Tab(icon: Icon(Icons.home), text: 'Home'),
+                Tab(icon: Icon(Icons.search), text: 'Search'),
+                Tab(icon: Icon(Icons.settings), text: 'Settings'),
               ],
             ),
           ),
           body: const TabBarView(
             children: [
-              ActualitesPage(), // Content for Tab 1
-              Text('Search'), // Content for Tab 2
-              Text('Settings'), // Content for Tab 3
+              ActualitesPage(),
+              Text('Search'),
+              Text('Settings'),
             ],
           ),
         ),
