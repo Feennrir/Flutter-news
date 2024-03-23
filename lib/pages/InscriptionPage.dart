@@ -67,61 +67,63 @@ class _InscriptionPageState extends State<InscriptionPage> {
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFormField(
-                style: const TextStyle(color: colorText),
-                controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Nom'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Veuillez entrer votre nom';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                style: const TextStyle(color: colorText),
-                controller: _emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Veuillez entrer votre email';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                style: const TextStyle(color: colorText),
-                controller: _phoneController,
-                decoration: const InputDecoration(labelText: 'Téléphone'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Veuillez entrer votre numéro de téléphone';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ElevatedButton(
-                    onPressed: _getImageFromGallery,
-                    child: const Text('Image'),
-                  ),
-                  const SizedBox(height: 16),
-                  if (_selectedImage != null)
-                    Image.file(
-                      _selectedImage!,
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextFormField(
+                  style: const TextStyle(color: colorText),
+                  controller: _nameController,
+                  decoration: const InputDecoration(labelText: 'Nom'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Veuillez entrer votre nom';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  style: const TextStyle(color: colorText),
+                  controller: _emailController,
+                  decoration: const InputDecoration(labelText: 'Email'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Veuillez entrer votre email';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  style: const TextStyle(color: colorText),
+                  controller: _phoneController,
+                  decoration: const InputDecoration(labelText: 'Téléphone'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Veuillez entrer votre numéro de téléphone';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: _getImageFromGallery,
+                      child: const Text('Image'),
                     ),
-                ],
-              ),
-            ],
+                    const SizedBox(height: 16),
+                    if (_selectedImage != null)
+                      Image.file(
+                        _selectedImage!,
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover,
+                      ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

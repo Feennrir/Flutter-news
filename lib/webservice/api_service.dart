@@ -60,11 +60,12 @@ class ActuApi implements IActuManager {
     request.fields['email'] = email;
     request.fields['phone'] = phone;
 
-    if (image != null) {
-      final imagePath = image.path;
-      final imageFile = await http.MultipartFile.fromPath('picture', imagePath);
-      request.files.add(imageFile);
-    }
+    // Functionality not implemented
+    // if (image != null) {
+    //   final imagePath = image.path;
+    //   final imageFile = await http.MultipartFile.fromPath('picture', imagePath);
+    //   request.files.add(imageFile);
+    // }
 
     try {
       final response = await request.send();
