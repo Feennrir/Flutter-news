@@ -14,15 +14,6 @@ class ActualitesPage extends StatefulWidget {
 
 class ActualitesPageState extends State<ActualitesPage> {
   late List<Actualite> _actualites = [];
-  List<Actualite> temp = [
-    Actualite(
-      id: 1,
-      title: 'Test',
-      description: 'Test',
-      pictureUrl: '',
-      publishedAt: DateTime.now(),
-    ),
-  ];
 
   @override
   void initState() {

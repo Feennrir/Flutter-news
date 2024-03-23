@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:test_technique/pages/ActualitesPage.dart';
 import 'package:test_technique/pages/InfosPage.dart';
 import 'package:test_technique/pages/InscriptionPage.dart';
+import 'package:test_technique/pages/MapPage.dart';
 import 'package:test_technique/utils/constants.dart';
 
 
@@ -26,7 +27,7 @@ class NewsApplication extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
-        length: 3, // The number of tabs
+        length: 4, // The number of tabs
         child: Scaffold(
           appBar: AppBar(
             title: const Text('Actualités'),
@@ -37,6 +38,7 @@ class NewsApplication extends StatelessWidget {
                 Tab(icon: Icon(Icons.home), text: 'Home'),
                 Tab(icon: Icon(Icons.info), text: 'Info'),
                 Tab(icon: Icon(Icons.settings), text: "Sign in"),
+                Tab(icon: Icon(Icons.map), text: "Map"),
               ],
             ),
           ),
@@ -45,6 +47,7 @@ class NewsApplication extends StatelessWidget {
               ActualitesPage(),
               InfosPage(),
               InscriptionPage(),
+              MapPage(),
             ],
           ),
         ),

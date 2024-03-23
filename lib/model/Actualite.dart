@@ -4,6 +4,8 @@ class Actualite {
   final String description;
   final String pictureUrl;
   final DateTime publishedAt;
+  final double latitude;
+  final double longitude;
 
   Actualite({
     required this.id,
@@ -11,6 +13,8 @@ class Actualite {
     required this.description,
     required this.pictureUrl,
     required this.publishedAt,
+    required this.latitude,
+    required this.longitude,
   });
 
   factory Actualite.fromJson(Map<String, dynamic> json) {
@@ -20,6 +24,8 @@ class Actualite {
       description: json['description'],
       pictureUrl: json['picture_url'] ?? '',
       publishedAt: DateTime.fromMillisecondsSinceEpoch(json['published_at'] * 1000),
+      latitude: json['latitude'],
+      longitude: json['longitude'],
     );
   }
 }

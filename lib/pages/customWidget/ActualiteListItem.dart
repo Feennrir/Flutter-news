@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:test_technique/utils/constants.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../../model/Actualite.dart';
 
-class ActualiteListItem extends StatelessWidget {
+class ActualiteListItem extends StatefulWidget {
   final Actualite actualite;
+  const ActualiteListItem({super.key, required this.actualite});
 
-  const ActualiteListItem({
-    super.key,
-    required this.actualite,
-  });
+  @override
+  State<ActualiteListItem> createState() => _ActualiteListItemState();
+}
+
+class _ActualiteListItemState extends State<ActualiteListItem> {
+  double _distanceInKm = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _calculateDistance();
+  }
 
   @override
   Widget build(BuildContext context) {
     double clickedImageSize = MediaQuery.of(context).size.width * 0.5;
-
     return GestureDetector(
       onTap: () {
-        if (actualite.pictureUrl.isNotEmpty) {
+        if (widget.actualite.pictureUrl.isNotEmpty) {
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -25,7 +34,8 @@ class ActualiteListItem extends StatelessWidget {
                 child: SizedBox(
                   height: clickedImageSize,
                   width: clickedImageSize,
-                  child: Image.network(actualite.pictureUrl, fit: BoxFit.cover),
+                  child: Image.network(widget.actualite.pictureUrl,
+                      fit: BoxFit.cover),
                 ),
               );
             },
@@ -50,28 +60,28 @@ class ActualiteListItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            actualite.pictureUrl.isEmpty
+            widget.actualite.pictureUrl.isEmpty
                 ? const SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: Icon(Icons.image),
-                  )
+              width: 50,
+              height: 50,
+              child: Icon(Icons.image),
+            )
                 : ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.network(
-                      actualite.pictureUrl,
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                widget.actualite.pictureUrl,
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+              ),
+            ),
             const SizedBox(width: 16.0),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    actualite.title,
+                    widget.actualite.title,
                     style: const TextStyle(
                       color: colorText,
                       fontSize: lg20,
@@ -80,21 +90,35 @@ class ActualiteListItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 8.0),
                   Text(
-                    actualite.description.length > 50
-                        ? '${actualite.description.substring(0, 50)}...'
-                        : actualite.description,
+                    widget.actualite.description.length > 50
+                        ? '${widget.actualite.description.substring(0, 50)}...'
+                        : widget.actualite.description,
                     style: const TextStyle(
                       fontSize: md16,
                       color: colorText,
                     ),
                   ),
                   const SizedBox(height: 8.0),
-                  Text(
-                    _formatDate(actualite.publishedAt),
-                    style: const TextStyle(
-                      fontSize: sm14,
-                      color: colorTextAccentuation,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        _formatDate(widget.actualite.publishedAt),
+                        style: const TextStyle(
+                          fontSize: sm14,
+                          color: colorTextAccentuation,
+                        ),
+                      ),
+                      Text(
+                        _distanceInKm == 0
+                            ? "0 km d'ici"
+                            : "${_distanceInKm.toStringAsFixed(0)} km d'ici",
+                        style: const TextStyle(
+                          fontSize: sm14,
+                          color: colorTextAccentuation,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -112,7 +136,28 @@ class ActualiteListItem extends StatelessWidget {
     return difference == 0
         ? 'Aujourd\'hui'
         : difference == 1
-            ? 'Hier'
-            : 'Il y a $difference jour(s)';
+        ? 'Hier'
+        : 'Il y a $difference jour(s)';
+  }
+
+  Future<void> _calculateDistance() async {
+    LocationPermission status = await Geolocator.checkPermission();
+    if (status == LocationPermission.denied) {
+      status = await Geolocator.requestPermission();
+    }
+
+    if (status == LocationPermission.whileInUse ||
+        status == LocationPermission.always) {
+      final Position position = await Geolocator.getCurrentPosition();
+      final double distanceInMeters = await Geolocator.distanceBetween(
+        position.latitude,
+        position.longitude,
+        widget.actualite.latitude,
+        widget.actualite.longitude,
+      );
+      setState(() {
+        _distanceInKm = distanceInMeters / 1000;
+      });
+    }
   }
 }
