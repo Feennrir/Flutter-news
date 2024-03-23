@@ -76,4 +76,28 @@ class ActuApi implements IActuManager {
       throw Exception('Failed to submit registration form');
     }
   }
+
+  @override
+  Future<String?> fetchHtmlContent() async {
+    final url = Uri.parse('https://test-pgt-dev.apnl.ws/html');
+    final headers = {
+      'Accept': 'text/html',
+      'Accept-Language': 'fr-FR',
+      'X-AP-Key': 'uD4Muli8nO6nzkSlsNM3d1Pm',
+      'X-AP-DeviceUID': 'Documentation',
+    };
+
+    try {
+      final response = await http.get(url, headers: headers);
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        print('Error fetching HTML: ${response.statusCode}');
+        return null;
+      }
+    } catch (error) {
+      print('Error fetching HTML: $error');
+      return null;
+    }
+  }
 }

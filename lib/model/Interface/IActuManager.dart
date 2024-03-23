@@ -8,4 +8,5 @@ abstract class IActuManager {
     required String phone,
     File? image,
   });
+  Future<String?> fetchHtmlContent();
 }

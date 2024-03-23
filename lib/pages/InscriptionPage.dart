@@ -89,7 +89,6 @@ class _InscriptionPageState extends State<InscriptionPage> {
                   if (value == null || value.isEmpty) {
                     return 'Veuillez entrer votre email';
                   }
-                  // You can add email validation here if needed
                   return null;
                 },
               ),
@@ -101,7 +100,6 @@ class _InscriptionPageState extends State<InscriptionPage> {
                   if (value == null || value.isEmpty) {
                     return 'Veuillez entrer votre numéro de téléphone';
                   }
-                  // You can add phone number validation here if needed
                   return null;
                 },
               ),
@@ -130,7 +128,7 @@ class _InscriptionPageState extends State<InscriptionPage> {
       bottomNavigationBar: BottomAppBar(
         color: colorBackground,
         child: FractionallySizedBox(
-          widthFactor: 1.0, // makes the button span the whole width
+          widthFactor: 1.0,
           child: ElevatedButton(
             onPressed: _submitForm,
             child: const Text('S\'inscrire'),

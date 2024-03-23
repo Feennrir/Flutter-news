@@ -27,7 +27,7 @@ class NewsApplication extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
-        length: 4, // The number of tabs
+        length: 4,
         child: Scaffold(
           appBar: AppBar(
             title: const Text('Actualités'),

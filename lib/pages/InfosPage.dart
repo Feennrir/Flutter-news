@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../webservice/api_service.dart';
+
 class InfosPage extends StatefulWidget {
   const InfosPage({super.key});
 
@@ -9,36 +11,37 @@ class InfosPage extends StatefulWidget {
 }
 
 class _InfosPageState extends State<InfosPage> {
+  String htmlContent = '';
   WebViewController? _controller;
+
   @override
   void initState() {
     super.initState();
-    _controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0x00000000))
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
-          onWebResourceError: (WebResourceError error) {},
-          onNavigationRequest: (NavigationRequest request) {
-            return NavigationDecision.navigate;
-          },
-        ),
-      )
-      ..loadRequest(Uri.parse('https://test-pgt-dev.apnl.ws/html'), headers: {
-        'Accept': 'text/html',
-        'X-AP-Key': 'uD4Muli8nO6nzkSlsNM3d1Pm',
-        'X-AP-DeviceUID': 'Documentation',
-      });
+    _initAsync();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("Infos")),
-        body: WebViewWidget(
-          controller: _controller!,
-        ));
+      body: _controller == null
+          ? const Center(child: CircularProgressIndicator())
+          : WebViewWidget(controller: _controller!),
+    );
+  }
+
+  Future<void> _initAsync() async {
+    await _fetchHtmlContent();
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadHtmlString(htmlContent);
+  }
+
+  Future<void> _fetchHtmlContent() async {
+    String? content = await ActuApi.instance.fetchHtmlContent();
+    if (content != null) {
+      setState(() {
+        htmlContent = content;
+      });
+    }
   }
 }
