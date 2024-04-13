@@ -9,7 +9,7 @@ Ce projet consiste simplement à afficher des news sous différents format. Son 
 ## Installation
 
 ```bash
-git clone https://github.com/Feennrir/NomeoFlutterProject.git
+git clone https://github.com/Feennrir/Flutter-news.git
 ```
 ```bash
 cd NomeoFlutterProject
