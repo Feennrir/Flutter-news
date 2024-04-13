@@ -1,9 +1,9 @@
-# Application Flutter pour le test technique de Nomeo
+# Flutter-news
 
 ## Introduction
 
 
-Ce projet consiste en une application Flutter conçue pour le test technique de Nomeo. Son but est de présenter une liste de news récupérées à partir d'une API, de charger une page HTML depuis cette API pour l'afficher dans un navigateur webview, ainsi que de permettre l'inscription et d'afficher une carte géographique présentant les coordonnées associées à chaque news.
+Ce projet consiste simplement à afficher des news sous différents format. Son but est de présenter une liste de news récupérées à partir d'une API, de charger une page HTML depuis cette API pour l'afficher dans un navigateur webview, ainsi que de permettre l'inscription et d'afficher une carte géographique présentant les coordonnées associées à chaque news.
 
 
 ## Installation
@@ -33,7 +33,7 @@ flutter run
 
 ## Informations :information_source:
 
-Flutter 3.19.4 • channel stable
+Flutter 3.19.4
 Tools • Dart 3.3.2 • DevTools 2.31.1
 
 
