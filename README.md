@@ -12,7 +12,7 @@ Ce projet consiste simplement à afficher des news sous différents format. Son 
 git clone https://github.com/Feennrir/Flutter-news.git
 ```
 ```bash
-cd NomeoFlutterProject
+cd Flutter-news
 ```
 ```bash
 flutter pub get
